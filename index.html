@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Monty Mhango | Home</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Fonts and Styles -->
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .parallax-bg {
+        position: relative;
+        background-image: url("pexels-joshsorenson-1714208.jpg");
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 0;
+      }
+
+      .parallax-bg::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+      }
+
+      .parallax-bg > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Mobile Menu Styles */
+      .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      
+      .mobile-menu.active {
+        max-height: 500px;
+      }
+
+      /* Hamburger Icon */
+      .hamburger {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        transition: all 0.25s;
+        position: relative;
+      }
+
+      .hamburger-top,
+      .hamburger-middle,
+      .hamburger-bottom {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 2px;
+        background: white;
+        transform: rotate(0);
+        transition: all 0.5s;
+      }
+
+      .hamburger-middle {
+        transform: translateY(7px);
+      }
+
+      .hamburger-bottom {
+        transform: translateY(14px);
+      }
+
+      .open .hamburger-top {
+        transform: rotate(45deg) translateY(6px) translateX(6px);
+      }
+
+      .open .hamburger-middle {
+        display: none;
+      }
+
+      .open .hamburger-bottom {
+        transform: rotate(-45deg) translateY(6px) translateX(-6px);
+      }
+
+      /* Larger tap targets for mobile */
+      .tap-target {
+        padding: 12px 16px;
+      }
+
+      .gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px; 
+  padding: 2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+    </style>
+  </head>
+  <body class="text-white bg-black">
+    <!-- Header with Mobile Menu -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 bg-black bg-opacity-40 backdrop-blur-md">
+      <div class="flex justify-between items-center">
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-btn" class="hamburger focus:outline-none">
+            <span class="hamburger-top"></span>
+            <span class="hamburger-middle"></span>
+            <span class="hamburger-bottom"></span>
+          </button>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <!-- Replace your entire <nav> section with this: -->
+<nav class="flex flex-wrap gap-6 text-sm uppercase tracking-wider font-medium">
+    <a href="#home" class="hover:text-blue-400 transition-all duration-300 relative group">
+      Home
+      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="#about" class="hover:text-blue-400 transition-all duration-300 relative group">
+      About
+      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="#cv" class="hover:text-blue-400 transition-all duration-300 relative group">
+      CV
+      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="#portfolio" class="hover:text-blue-400 transition-all duration-300 relative group">
+      Portfolio
+      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+    <a href="#contact" class="hover:text-blue-400 transition-all duration-300 relative group">
+      Contact
+      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+    </a>
+  </nav>
+        
+        <span class="text-xs tracking-wide text-gray-300 hidden sm:block">
+          +27 677 012 204
+        </span>
+      </div>
+      
+      <!-- Mobile Menu -->
+      <div id="menu" class="mobile-menu md:hidden bg-black bg-opacity-90 mt-4 rounded-lg">
+        <div class="flex flex-col px-4 py-2 space-y-3">
+          <a href="#home" class="block py-2 hover:underline tap-target">Home</a>
+          <a href="#about" class="block py-2 hover:underline tap-target">About</a>
+          <a href="#cv" class="block py-2 hover:underline tap-target">CV</a>
+          <a href="#portfolio" class="block py-2 hover:underline tap-target">Portfolio</a>
+          <a href="#contact" class="block py-2 hover:underline tap-target">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="parallax-bg h-screen flex items-center justify-center px-4 pt-24 pb-16">
+      <div class="text-center max-w-2xl mx-4" data-aos="fade-up">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
+            Monty <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Mhango</span>
+          </h1>
+          <div class="flex justify-center gap-6">
+            <!-- CV Button -->
+            <a href="#cv" class="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 font-medium flex items-center gap-2 group">
+              <span>View CV</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-y-0.5 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          
+            <!-- Portfolio Button -->
+            <a href="#portfolio" class="px-6 py-3 rounded-full border-2 border-blue-400 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-300 font-medium flex items-center gap-2 group">
+              <span>My Work</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:rotate-12 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-[#0b0b0c] to-black text-white">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+          <div class="md:w-1/2" data-aos="fade-right">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">About</span> Me
+            </h2>
+            <div class="space-y-6">
+              <p class="text-gray-300 leading-relaxed">
+                Hi, I'm <span class="text-white font-semibold">Monty Mhango</span>,
+                an aspiring Data Scientist with a strong foundation in
+                problem-solving, critical thinking, and collaborative project work.
+              </p>
+              
+              <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="bg-blue-600 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 class="text-lg font-semibold">ALX Certified</h3>
+                </div>
+                <p class="text-gray-300 pl-14">
+                  Completed the <strong>Professional Foundations Program</strong> with focus on collaborative system development and problem-solving.
+                </p>
+              </div>
+      
+              <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="bg-purple-600 p-2 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
+                  </div>
+                  <h3 class="text-lg font-semibold">CareerVista Project</h3>
+                </div>
+                <p class="text-gray-300 pl-14">
+                  Designed UI/UX for a career navigation app addressing job creation challenges.
+                </p>
+              </div>
+      
+              <p class="text-gray-300 leading-relaxed">
+                I'm currently building expertise in <span class="text-white font-medium">Python for Data Science</span> to drive insights and impact through data.
+              </p>
+            </div>
+          </div>
+      
+          <div class="md:w-1/2 relative group" data-aos="fade-left">
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl opacity-75 group-hover:opacity-100 blur-md transition duration-500"></div>
+            <div class="relative gradient-border rounded-2xl overflow-hidden">
+              <img
+                src="Portfolio Image.png"
+                alt="Monty Mhango"
+                class="rounded-2xl w-full h-auto transform transition duration-500 hover:scale-105"
+                loading="lazy"
+              />
+              <!-- <div class="absolute -bottom-5 -right-5 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium animate-bounce">
+                Data Enthusiast
+              </div> -->
+            </div>
+          </div>
+        </div>
+          <!-- ===== Bio & Video Timeline Section ===== -->
+  <div class="max-w-6xl mx-auto mt-16">
+  <div class="text-center mb-12" data-aos="fade-up">
+    <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">
+      Professional Journey
+    </h3>
+    <div class="w-20 h-0.5 bg-gray-700 mx-auto"></div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <!-- Timeline Card -->
+    <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 h-full" data-aos="fade-right">
+      <div class="space-y-8">
+        <!-- Timeline Item 1 -->
+        <div class="relative pl-10 pb-8 border-l-2 border-blue-400/30">
+          <div class="absolute -left-[9px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+          <h4 class="text-lg font-semibold text-white">Background</h4>
+          <p class="text-gray-300 mt-2">
+            Aspiring Data Scientist passionate about leveraging data to solve real-world problems through collaborative system development.
+          </p>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="relative pl-10 pb-8 border-l-2 border-blue-400/30">
+          <div class="absolute -left-[9px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+          <h4 class="text-lg font-semibold text-white">Projects</h4>
+          <p class="text-gray-300 mt-2">
+            Built <strong>PCRepairs</strong> (inventory system) and <strong>Foot Flex</strong> (e-commerce platform), demonstrating full-stack capabilities.
+          </p>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="relative pl-10 border-l-2 border-blue-400/30">
+          <div class="absolute -left-[9px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+          <h4 class="text-lg font-semibold text-white">Skills</h4>
+          <p class="text-gray-300 mt-2">
+            Combines technical expertise in Python/Data Science with strong UI/UX design and team collaboration skills.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Card -->
+    <div class="relative" data-aos="fade-left">
+      <div class="relative" style="padding-bottom: 75%;"> <!-- 4:3 Aspect Ratio -->
+        <iframe
+          class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg border border-gray-700"
+          src="https://www.youtube.com/embed/rAJS1uhf2gI"
+          title="Elevator Pitch"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="mt-4 text-center">
+        <h3 class="text-lg font-medium text-white">My Elevator Pitch</h3>
+        <p class="text-gray-400 text-sm">2-minute professional introduction</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+    <!-- CV Section -->
+    <section id="cv" class="bg-[#0b0b0c] text-white py-16 sm:py-20 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div data-aos="fade-right">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+              Curriculum Vitae
+            </h2>
+          
+            <!-- Technical Skills Card -->
+            <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800 hover:border-blue-400 transition-all duration-300 group mb-6">
+              <div class="flex items-start mb-3">
+                <div class="bg-blue-600 p-2 rounded-lg mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-blue-400">Technical Skills</h3>
+              </div>
+              <div class="flex flex-wrap gap-2 pl-11">
+                <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Python</span>
+                <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Pandas</span>
+                <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">NumPy</span>
+                <span class="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm">HTML/CSS</span>
+                <span class="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm">JavaScript</span>
+                <span class="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm">Git</span>
+                <span class="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm">Flask</span>
+              </div>
+            </div>
+          
+            <!-- Education Card -->
+            <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800 hover:border-purple-400 transition-all duration-300 group">
+              <div class="flex items-start mb-3">
+                <div class="bg-purple-600 p-2 rounded-lg mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-purple-400">Education</h3>
+              </div>
+              <div class="space-y-2 pl-11">
+                <div>
+                  <p class="font-medium text-white">ALX Africa</p>
+                  <p class="text-sm text-gray-400">Professional Foundations Program</p>
+                  <p class="text-xs text-gray-500 mt-1">2025 (Completed)</p>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                  <p class="text-sm text-gray-400">Kaggle - Python for Data Science</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div data-aos="fade-left">
+            <div class="mb-6">
+              <h3 class="text-base sm:text-lg font-semibold mb-4 text-gray-300">Projects</h3>
+              
+              <!-- CareerVista Card -->
+              <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800 relative overflow-hidden hover:border-blue-400 transition-all duration-300 group mb-4">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                <div class="relative z-10">
+                  <h4 class="font-semibold text-white flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    CareerVista - Career Navigator App
+                  </h4>
+                  <p class="text-gray-300 mt-2 text-sm">UI/UX Designer | Job creation solution</p>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="px-2 py-1 bg-blue-900/30 text-blue-400 rounded-full text-xs">Figma</span>
+                    <span class="px-2 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs">Research</span>
+                    <span class="px-2 py-1 bg-gray-800/50 text-gray-300 rounded-full text-xs">Presentation</span>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- YouTube Converter Card -->
+              <div class="bg-gray-900/50 p-5 rounded-xl border border-gray-800 relative overflow-hidden hover:border-purple-400 transition-all duration-300 group">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                <div class="relative z-10">
+                  <h4 class="font-semibold text-white flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    YouTube to MP3 Converter (Flask)
+                  </h4>
+                  <p class="text-gray-300 mt-2 text-sm">Full-stack web app with Flask</p>
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="px-2 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs">Flask</span>
+                    <span class="px-2 py-1 bg-blue-900/30 text-blue-400 rounded-full text-xs">Python</span>
+                    <span class="px-2 py-1 bg-gray-800/50 text-gray-300 rounded-full text-xs">Tailwind</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="min-h-screen bg-gray-950 text-white py-12 sm:py-16 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 border-b-4 border-blue-500 inline-block">
+          Portfolio
+        </h2>
+        <p class="text-base sm:text-lg text-gray-300 mb-8">
+          Explore my external Data Science work via the showcase below.
+        </p>
+        <div class="rounded-2xl overflow-hidden border border-gray-700 shadow-xl">
+          <iframe
+            src="https://datascienceportfol.io/montymhango01"
+            class="w-full h-[70vh] sm:h-[80vh]"
+            frameborder="0"
+            loading="lazy"
+            title="Monty Mhango Portfolio"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-[#0b0b0c] text-white py-16 sm:py-20 px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 border-b-4 border-blue-500 inline-block">
+          Contact Me
+        </h2>
+        <p class="text-base sm:text-lg text-gray-300 mb-8">
+          I'd love to connect! Drop me a message for collaborations or
+          inquiries.
+        </p>
+        <form class="space-y-6">
+            <!-- Name Field -->
+            <div class="relative">
+              <input 
+                type="text" 
+                id="name" 
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer"
+                placeholder=" "
+              />
+              <label 
+                for="name" 
+                class="absolute left-3 -top-2.5 bg-gray-800 px-1 text-sm text-blue-400 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-blue-400 peer-focus:text-sm"
+              >
+                Full Name
+              </label>
+            </div>
+          
+            <!-- Email Field -->
+            <div class="relative">
+              <input 
+                type="email" 
+                id="email" 
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer"
+                placeholder=" "
+              />
+              <label 
+                for="email" 
+                class="absolute left-3 -top-2.5 bg-gray-800 px-1 text-sm text-blue-400 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3.5 peer-focus:-top-2.5 peer-focus:text-blue-400 peer-focus:text-sm"
+              >
+                Email Address
+              </label>
+            </div>
+          
+            <!-- Message Field -->
+            <div class="relative">
+              <textarea 
+                id="message" 
+                rows="4"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer"
+                placeholder=" "
+              ></textarea>
+              <label 
+                for="message" 
+                class="absolute left-3 -top-2.5 bg-gray-800 px-1 text-sm text-blue-400 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-blue-400 peer-focus:text-sm"
+              >
+                Your Message
+              </label>
+            </div>
+          
+            <button 
+              type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center gap-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+              Send Message
+            </button>
+          </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-6 sm:py-8 px-4 sm:px-6 border-t border-gray-800">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
+        <div class="text-xs sm:text-sm text-center md:text-left">
+          <p>&copy; 2025 Monty Mhango. All rights reserved.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+          <a href="#home" class="hover:text-white transition tap-target">Home</a>
+          <a href="#about" class="hover:text-white transition tap-target">About</a>
+          <a href="#cv" class="hover:text-white transition tap-target">CV</a>
+          <a href="#portfolio" class="hover:text-white transition tap-target">Portfolio</a>
+          <a href="#contact" class="hover:text-white transition tap-target">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+<button id="back-to-top" class="fixed bottom-8 right-8 p-3 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-all opacity-0 invisible duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+    <!-- Initialize AOS -->
+    <script>
+      AOS.init();
+      
+      // Mobile menu functionality
+      const menuBtn = document.getElementById('menu-btn');
+      const menu = document.getElementById('menu');
+      
+      menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('open');
+        menu.classList.toggle('active');
+      });
+      
+      // Close menu when clicking on a link
+      const menuLinks = document.querySelectorAll('#menu a');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuBtn.classList.remove('open');
+          menu.classList.remove('active');
+        });
+      });
+      
+      // Prevent scrolling when menu is open
+      menuBtn.addEventListener('click', () => {
+        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+      });
+
+      // Back-to-top button logic
+  const backToTopButton = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTopButton.classList.remove('opacity-0', 'invisible');
+      backToTopButton.classList.add('opacity-100', 'visible');
+    } else {
+      backToTopButton.classList.remove('opacity-100', 'visible');
+      backToTopButton.classList.add('opacity-0', 'invisible');
+    }
+  });
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+    </script>
+  </body>
+</html>
