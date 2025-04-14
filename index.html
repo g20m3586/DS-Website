@@ -2,8 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monty Mhango | Home</title>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" as="style">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,19 +24,28 @@
       }
 
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
 
       body {
         font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
 
+      /* Optimized parallax for mobile */
       .parallax-bg {
         position: relative;
         background-image: url("pexels-joshsorenson-1714208.jpg");
-        background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         z-index: 0;
+      }
+
+      @media (min-width: 768px) {
+        .parallax-bg {
+          background-attachment: fixed;
+        }
       }
 
       .parallax-bg::before {
@@ -106,25 +120,77 @@
       /* Larger tap targets for mobile */
       .tap-target {
         padding: 12px 16px;
+        min-width: 44px;
+        min-height: 44px;
       }
 
       .gradient-border {
-  position: relative;
-}
-.gradient-border::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 12px; 
-  padding: 2px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
+        position: relative;
+      }
+      .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 12px; 
+        padding: 2px;
+        background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+        -webkit-mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+
+      /* Performance optimizations */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Mobile-specific adjustments */
+      @media (max-width: 767px) {
+        .hero-buttons {
+          flex-direction: column;
+          gap: 12px;
+        }
+        
+        .hero-buttons a {
+          width: 100%;
+          text-align: center;
+        }
+        
+        .timeline-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+        
+        .video-container {
+          padding-bottom: 56.25%; /* 16:9 aspect ratio for mobile */
+        }
+        
+        #portfolio iframe {
+          height: 60vh;
+        }
+        
+        .cv-grid {
+          grid-template-columns: 1fr;
+          gap: 24px;
+        }
+      }
+
+      /* Improved form inputs for mobile */
+      input, textarea, button {
+        -webkit-appearance: none;
+        border-radius: 0;
+      }
+
+      /* Prevent zoom on input focus */
+      @media (max-width: 480px) {
+        input, textarea {
+          font-size: 16px !important;
+        }
+      }
     </style>
   </head>
   <body class="text-white bg-black">
@@ -133,7 +199,7 @@
       <div class="flex justify-between items-center">
         <!-- Mobile menu button -->
         <div class="md:hidden flex items-center">
-          <button id="menu-btn" class="hamburger focus:outline-none">
+          <button id="menu-btn" class="hamburger focus:outline-none tap-target">
             <span class="hamburger-top"></span>
             <span class="hamburger-middle"></span>
             <span class="hamburger-bottom"></span>
@@ -141,29 +207,28 @@
         </div>
         
         <!-- Desktop Navigation -->
-        <!-- Replace your entire <nav> section with this: -->
-<nav class="flex flex-wrap gap-6 text-sm uppercase tracking-wider font-medium">
-    <a href="#home" class="hover:text-blue-400 transition-all duration-300 relative group">
-      Home
-      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-    <a href="#about" class="hover:text-blue-400 transition-all duration-300 relative group">
-      About
-      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-    <a href="#cv" class="hover:text-blue-400 transition-all duration-300 relative group">
-      CV
-      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-    <a href="#portfolio" class="hover:text-blue-400 transition-all duration-300 relative group">
-      Portfolio
-      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-    <a href="#contact" class="hover:text-blue-400 transition-all duration-300 relative group">
-      Contact
-      <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-    </a>
-  </nav>
+        <nav class="hidden md:flex flex-wrap gap-6 text-sm uppercase tracking-wider font-medium">
+          <a href="#home" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+            Home
+            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#about" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+            About
+            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#cv" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+            CV
+            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#portfolio" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+            Portfolio
+            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a href="#contact" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+            Contact
+            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
         
         <span class="text-xs tracking-wide text-gray-300 hidden sm:block">
           +27 677 012 204
@@ -173,11 +238,11 @@
       <!-- Mobile Menu -->
       <div id="menu" class="mobile-menu md:hidden bg-black bg-opacity-90 mt-4 rounded-lg">
         <div class="flex flex-col px-4 py-2 space-y-3">
-          <a href="#home" class="block py-2 hover:underline tap-target">Home</a>
-          <a href="#about" class="block py-2 hover:underline tap-target">About</a>
-          <a href="#cv" class="block py-2 hover:underline tap-target">CV</a>
-          <a href="#portfolio" class="block py-2 hover:underline tap-target">Portfolio</a>
-          <a href="#contact" class="block py-2 hover:underline tap-target">Contact</a>
+          <a href="#home" class="block py-3 hover:underline tap-target">Home</a>
+          <a href="#about" class="block py-3 hover:underline tap-target">About</a>
+          <a href="#cv" class="block py-3 hover:underline tap-target">CV</a>
+          <a href="#portfolio" class="block py-3 hover:underline tap-target">Portfolio</a>
+          <a href="#contact" class="block py-3 hover:underline tap-target">Contact</a>
         </div>
       </div>
     </header>
@@ -188,9 +253,9 @@
         <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
             Monty <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Mhango</span>
           </h1>
-          <div class="flex justify-center gap-6">
+          <div class="flex justify-center gap-6 hero-buttons">
             <!-- CV Button -->
-            <a href="#cv" class="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 font-medium flex items-center gap-2 group">
+            <a href="#cv" class="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 transition-all duration-500 shadow-lg hover:shadow-xl hover:shadow-blue-500/20 font-medium flex items-center justify-center gap-2 group tap-target">
               <span>View CV</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-y-0.5 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -198,7 +263,7 @@
             </a>
           
             <!-- Portfolio Button -->
-            <a href="#portfolio" class="px-6 py-3 rounded-full border-2 border-blue-400 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-300 font-medium flex items-center gap-2 group">
+            <a href="#portfolio" class="px-6 py-3 rounded-full border-2 border-blue-400 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-300 font-medium flex items-center justify-center gap-2 group tap-target">
               <span>My Work</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:rotate-12 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -266,14 +331,13 @@
                 alt="Monty Mhango"
                 class="rounded-2xl w-full h-auto transform transition duration-500 hover:scale-105"
                 loading="lazy"
+                width="500"
+                height="500"
               />
-              <!-- <div class="absolute -bottom-5 -right-5 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg font-medium animate-bounce">
-                Data Enthusiast
-              </div> -->
             </div>
           </div>
         </div>
-          <!-- ===== Bio & Video Timeline Section ===== -->
+          <!-- Bio & Video Timeline Section -->
   <div class="max-w-6xl mx-auto mt-16">
   <div class="text-center mb-12" data-aos="fade-up">
     <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">
@@ -282,7 +346,7 @@
     <div class="w-20 h-0.5 bg-gray-700 mx-auto"></div>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start timeline-grid">
     <!-- Timeline Card -->
     <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 h-full" data-aos="fade-right">
       <div class="space-y-8">
@@ -317,7 +381,7 @@
 
     <!-- Video Card -->
     <div class="relative" data-aos="fade-left">
-      <div class="relative" style="padding-bottom: 75%;"> <!-- 4:3 Aspect Ratio -->
+      <div class="relative video-container">
         <iframe
           class="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg border border-gray-700"
           src="https://www.youtube.com/embed/rAJS1uhf2gI"
@@ -339,7 +403,7 @@
 
     <!-- CV Section -->
     <section id="cv" class="bg-[#0b0b0c] text-white py-16 sm:py-20 px-4 sm:px-6">
-      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 cv-grid">
         <div data-aos="fade-right">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
               Curriculum Vitae
@@ -473,8 +537,9 @@
               <input 
                 type="text" 
                 id="name" 
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder=" "
+                required
               />
               <label 
                 for="name" 
@@ -489,8 +554,9 @@
               <input 
                 type="email" 
                 id="email" 
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder=" "
+                required
               />
               <label 
                 for="email" 
@@ -505,8 +571,9 @@
               <textarea 
                 id="message" 
                 rows="4"
-                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-transparent peer focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder=" "
+                required
               ></textarea>
               <label 
                 for="message" 
@@ -518,7 +585,7 @@
           
             <button 
               type="submit"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center gap-2"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition duration-200 flex items-center justify-center gap-2 tap-target"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
@@ -546,7 +613,7 @@
     </footer>
 
     <!-- Back to Top Button -->
-<button id="back-to-top" class="fixed bottom-8 right-8 p-3 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-all opacity-0 invisible duration-300">
+<button id="back-to-top" class="fixed bottom-8 right-8 p-3 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-all opacity-0 invisible duration-300 tap-target" aria-label="Back to top">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
@@ -554,7 +621,12 @@
 
     <!-- Initialize AOS -->
     <script>
-      AOS.init();
+      // Initialize animations
+      AOS.init({
+        duration: 600,
+        once: true,
+        offset: 120
+      });
       
       // Mobile menu functionality
       const menuBtn = document.getElementById('menu-btn');
@@ -563,6 +635,7 @@
       menuBtn.addEventListener('click', () => {
         menuBtn.classList.toggle('open');
         menu.classList.toggle('active');
+        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
       });
       
       // Close menu when clicking on a link
@@ -571,28 +644,41 @@
         link.addEventListener('click', () => {
           menuBtn.classList.remove('open');
           menu.classList.remove('active');
+          document.body.style.overflow = '';
         });
-      });
-      
-      // Prevent scrolling when menu is open
-      menuBtn.addEventListener('click', () => {
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
       });
 
       // Back-to-top button logic
-  const backToTopButton = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-      backToTopButton.classList.remove('opacity-0', 'invisible');
-      backToTopButton.classList.add('opacity-100', 'visible');
-    } else {
-      backToTopButton.classList.remove('opacity-100', 'visible');
-      backToTopButton.classList.add('opacity-0', 'invisible');
-    }
-  });
-  backToTopButton.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+      const backToTopButton = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove('opacity-0', 'invisible');
+          backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopButton.classList.remove('opacity-100', 'visible');
+          backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Optimize performance by delaying non-critical animations
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          document.body.classList.add('loaded');
+        }, 100);
+      });
+
+      // Prevent form submission for demo purposes
+      const form = document.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Form submission would be processed here in a live environment.');
+        });
+      }
     </script>
   </body>
 </html>
