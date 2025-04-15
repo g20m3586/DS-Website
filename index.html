@@ -70,52 +70,66 @@
         overflow: hidden;
         transition: max-height 0.3s ease-out;
       }
+      .mobile-menu a {
+  padding-left: 1rem; /* Adds more left padding */
+}
       
       .mobile-menu.active {
         max-height: 500px;
       }
 
-      /* Hamburger Icon */
-      .hamburger {
-        cursor: pointer;
-        width: 24px;
-        height: 24px;
-        transition: all 0.25s;
-        position: relative;
-      }
+      /* Modern Hamburger Icon */
+.hamburger {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+}
 
-      .hamburger-top,
-      .hamburger-middle,
-      .hamburger-bottom {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 24px;
-        height: 2px;
-        background: white;
-        transform: rotate(0);
-        transition: all 0.5s;
-      }
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: relative;
+}
 
-      .hamburger-middle {
-        transform: translateY(7px);
-      }
+.hamburger-line:before,
+.hamburger-line:after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
 
-      .hamburger-bottom {
-        transform: translateY(14px);
-      }
+.hamburger-line:before {
+  transform: translateY(-7px);
+}
 
-      .open .hamburger-top {
-        transform: rotate(45deg) translateY(6px) translateX(6px);
-      }
+.hamburger-line:after {
+  transform: translateY(7px);
+}
 
-      .open .hamburger-middle {
-        display: none;
-      }
+.open .hamburger-line {
+  background: transparent;
+}
 
-      .open .hamburger-bottom {
-        transform: rotate(-45deg) translateY(6px) translateX(-6px);
-      }
+.open .hamburger-line:before {
+  transform: rotate(45deg);
+}
+
+.open .hamburger-line:after {
+  transform: rotate(-45deg);
+}
 
       /* Larger tap targets for mobile */
       .tap-target {
@@ -221,61 +235,135 @@
     height: 100%;
   }
 }
+/* Enhanced Mobile Menu */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.mobile-menu.active {
+  max-height: 400px;
+}
+
+/* Smooth transitions for menu items */
+.mobile-menu a {
+  transition: all 0.2s ease;
+  color: #e5e7eb;
+  font-weight: 500;
+}
+
+.mobile-menu a:hover {
+  color: white;
+  transform: translateX(4px);
+}
+/* Mobile nav icons */
+@media (max-width: 767px) {
+  .mobile-nav-icons {
+    display: flex;
+    gap: 0.75rem;
+    margin-left: 0.5rem;
+  }
+  
+  .mobile-nav-icons a {
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-nav-icons a:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-nav-icons {
+    display: none;
+  }
+}
     </style>
   </head>
   <body class="text-white bg-black">
     <!-- Header with Mobile Menu -->
-    <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 bg-black bg-opacity-40 backdrop-blur-md">
-      <div class="flex justify-between items-center">
-        <!-- Mobile menu button -->
-        <div class="md:hidden flex items-center">
-          <button id="menu-btn" class="hamburger focus:outline-none tap-target">
-            <span class="hamburger-top"></span>
-            <span class="hamburger-middle"></span>
-            <span class="hamburger-bottom"></span>
-          </button>
-        </div>
-        
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex flex-wrap gap-6 text-sm uppercase tracking-wider font-medium">
-          <a href="#home" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
-            Home
-            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#about" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
-            About
-            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#cv" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
-            CV
-            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#portfolio" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
-            Portfolio
-            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#contact" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
-            Contact
-            <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-        </nav>
-        
-        <span class="text-xs tracking-wide text-gray-300 hidden sm:block">
-          +27 677 012 204
-        </span>
-      </div>
-      
-      <!-- Mobile Menu -->
-      <div id="menu" class="mobile-menu md:hidden bg-black bg-opacity-90 mt-4 rounded-lg">
-        <div class="flex flex-col px-4 py-2 space-y-3">
-          <a href="#home" class="block py-3 hover:underline tap-target">Home</a>
-          <a href="#about" class="block py-3 hover:underline tap-target">About</a>
-          <a href="#cv" class="block py-3 hover:underline tap-target">CV</a>
-          <a href="#portfolio" class="block py-3 hover:underline tap-target">Portfolio</a>
-          <a href="#contact" class="block py-3 hover:underline tap-target">Contact</a>
-        </div>
-      </div>
-    </header>
+<header class="fixed top-0 left-0 w-full z-50 px-3 py-2 sm:px-4 bg-black bg-opacity-40 backdrop-blur-md">
+  <div class="flex justify-between items-center">
+    <!-- Mobile menu button with icons -->
+    <div class="md:hidden flex items-center gap-2">
+      <button id="menu-btn" class="hamburger focus:outline-none tap-target p-1">
+        <span class="hamburger-line"></span>
+      </button>
+
+
+    </div>
+    
+    <!-- Desktop Navigation (unchanged) -->
+    <nav class="hidden md:flex flex-wrap gap-6 text-sm uppercase tracking-wider font-medium">
+      <a href="#home" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+        Home
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#about" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+        About
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#cv" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+        CV
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#portfolio" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+        Portfolio
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a href="#contact" class="hover:text-blue-400 transition-all duration-300 relative group tap-target">
+        Contact
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </nav>
+    
+    <span class="text-xs tracking-wide text-gray-300 hidden sm:block">
+      +27 677 012 204
+    </span>
+  </div>
+  
+  <!-- Mobile Menu -->
+   
+  <div id="menu" class="mobile-menu md:hidden bg-gray-900/95 mt-2 rounded-lg transition-all duration-300 ease-in-out">
+    <div class="flex flex-col px-3 py-2 space-y-1">
+      <a href="#home" class="flex items-center py-2 px-3 rounded-lg hover:bg-gray-800 transition-all tap-target">
+        <svg class="w-4 h-4 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+        <span class="text-sm">Home</span>
+      </a>
+      <a href="#about" class="flex items-center py-2 px-3 rounded-lg hover:bg-gray-800 transition-all tap-target">
+        <svg class="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        </svg>
+        <span class="text-sm">About</span>
+      </a>
+      <a href="#cv" class="flex items-center py-2 px-3 rounded-lg hover:bg-gray-800 transition-all tap-target">
+        <svg class="w-4 h-4 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <span class="text-sm">CV</span>
+      </a>
+      <a href="#portfolio" class="flex items-center py-2 px-3 rounded-lg hover:bg-gray-800 transition-all tap-target">
+        <svg class="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+        <span class="text-sm">Portfolio</span>
+      </a>
+      <a href="#contact" class="flex items-center py-2 px-3 rounded-lg hover:bg-gray-800 transition-all tap-target">
+        <svg class="w-4 h-4 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        <span class="text-sm">Contact</span>
+      </a>
+    </div>
+  </div>
+</header>
 
     <!-- Hero Section -->
     <section id="home" class="parallax-bg h-screen flex items-center justify-center px-4 pt-24 pb-16">
@@ -628,20 +716,32 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black text-gray-400 py-6 sm:py-8 px-4 sm:px-6 border-t border-gray-800">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
-        <div class="text-xs sm:text-sm text-center md:text-left">
-          <p>&copy; 2025 Monty Mhango. All rights reserved.</p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
-          <a href="#home" class="hover:text-white transition tap-target">Home</a>
-          <a href="#about" class="hover:text-white transition tap-target">About</a>
-          <a href="#cv" class="hover:text-white transition tap-target">CV</a>
-          <a href="#portfolio" class="hover:text-white transition tap-target">Portfolio</a>
-          <a href="#contact" class="hover:text-white transition tap-target">Contact</a>
-        </div>
-      </div>
-    </footer>
+<!-- Footer -->
+<footer class="bg-black text-gray-400 py-6 sm:py-8 px-4 sm:px-6 border-t border-gray-800">
+  <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+    
+    <!-- Left: Copyright with SVG -->
+    <div class="flex items-center gap-2 text-sm sm:text-base">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4c1.57 0 2.94-.91 3.58-2.22a1 1 0 10-1.79-.9A2 2 0 1112 10c.83 0 1.54.51 1.85 1.22a1 1 0 001.79-.9A4 4 0 0012 8z" />
+      </svg>
+      <span>&copy; 2025 Monty Mhango. All rights reserved.</span>
+    </div>
+
+    <!-- Right: Developer Credit with SVG -->
+    <div class="flex items-center gap-2 text-xs text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+      <span>Designed & Built by Monty Mhango</span>
+    </div>
+
+  </div>
+</footer>
+
+
 
     <!-- Back to Top Button -->
 <button id="back-to-top" class="fixed bottom-8 right-8 p-3 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-all opacity-0 invisible duration-300 tap-target" aria-label="Back to top">
@@ -664,20 +764,36 @@
       const menu = document.getElementById('menu');
       
       menuBtn.addEventListener('click', () => {
-        menuBtn.classList.toggle('open');
-        menu.classList.toggle('active');
-        document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-      });
+  menuBtn.classList.toggle('open');
+  menu.classList.toggle('active');
+  document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+  
+  // Add this for accessibility
+  const isExpanded = menuBtn.classList.contains('open');
+  menuBtn.setAttribute('aria-expanded', isExpanded);
+});
       
       // Close menu when clicking on a link
-      const menuLinks = document.querySelectorAll('#menu a');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          menuBtn.classList.remove('open');
-          menu.classList.remove('active');
-          document.body.style.overflow = '';
-        });
-      });
+      const menuLinks = document.querySelectorAll('#menu a, header a[href^="#"]');
+
+menuLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Close menu
+    menuBtn.classList.remove('open');
+    menu.classList.remove('active');
+    document.body.style.overflow = 'auto';
+
+    // Get the target section
+    const targetId = link.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 
       // Back-to-top button logic
       const backToTopButton = document.getElementById('back-to-top');
